@@ -10,7 +10,7 @@ const NavBar = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 z-10">
       <div className="navbar bg-base-100 flex justify-between">
         <div className="">
           <div className="dropdown">
@@ -41,6 +41,9 @@ const NavBar = () => {
               <li>
                 <Link>about</Link>
               </li>
+              <li>
+                <Link to='/classes'>Classes</Link>
+              </li>
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
@@ -54,6 +57,9 @@ const NavBar = () => {
             <li>
               <Link>about</Link>
             </li>
+            <li>
+                <Link to='/classes'>Classes</Link>
+              </li>
           </ul>
         </div>
         <div className="flex-none">
