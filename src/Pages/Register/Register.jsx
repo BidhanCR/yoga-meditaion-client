@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
@@ -12,6 +12,9 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const { createUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
   const [imageFile, setImageFile] = useState(null);
 
   const onSubmit = (data) => {
@@ -62,7 +65,7 @@ const Register = () => {
                       showConfirmButton: false,
                       timer: 1500,
                     });
-                    Navigate("/");
+                    navigate(from, { replace: true })
                   }
                 });
             })

@@ -1,21 +1,30 @@
 
 import { useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
-import { Link } from "react-router-dom";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
+import SocialLogIn from "../../components/SocialLogIn/SocialLogIn";
 
 const Login = () => {
   const {signIn} = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate()
+  const location = useLocation()
+  const from = location.state?.from?.pathname || '/'
 
   const onSubmit = (data) => {
-    // Perform login logic here
+    
     console.log(data);
     signIn(data.email, data.password)
-    .then(res=> res.json())
+    .then(result=> {
+      console.log(result.user)
+      navigate(from, { replace: true })
+    })
     .catch(error=> console.log(error))
   };
+  
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -72,7 +81,9 @@ const Login = () => {
             Register
           </Link>
         </div>
+        <SocialLogIn></SocialLogIn>
       </form>
+      
     </div>
   );
 };

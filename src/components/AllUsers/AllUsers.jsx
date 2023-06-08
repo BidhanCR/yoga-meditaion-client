@@ -61,15 +61,17 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td className="flex flex-col w-1/3 space-y-2">
+                <td className="flex flex-col md:w-1/3  space-y-2 ">
                   <button
                     onClick={() => handleMakeAdmin(user)}
                     className="btn btn-primary btn-sm"
+                    disabled={user.role === "Admin"}
                   >
                     Make Admin
                   </button>
-                  <button className="btn btn-secondary btn-sm">
+                  <button className="btn btn-secondary btn-sm" disabled={user.role === "Instructor"}>
                     Make Instructor
+          
                   </button>
                 </td>
               </tr>
