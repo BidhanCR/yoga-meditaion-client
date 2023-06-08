@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+
 import { useForm } from "react-hook-form";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
+import useAuth from "../../Hooks/useAuth";
+import { useState } from "react";
 
 const Login = () => {
-  const {signIn} = useContext(AuthContext);
+  const {signIn} = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
@@ -16,7 +17,7 @@ const Login = () => {
     .catch(error=> console.log(error))
   };
 
-  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);

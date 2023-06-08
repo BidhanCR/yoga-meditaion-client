@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { AuthContext } from "../../providers/AuthProvider";
 import { Navigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
   const {
@@ -11,7 +11,7 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useAuth();
   const [imageFile, setImageFile] = useState(null);
 
   const onSubmit = (data) => {
@@ -39,6 +39,7 @@ const Register = () => {
               const saveUser = {
                 name: data.name,
                 email: data.email,
+                role: "student",
                 image: photoUrl,
                 gender: data.gender,
                 phoneNumber: data.phoneNumber,

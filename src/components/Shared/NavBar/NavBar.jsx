@@ -1,9 +1,9 @@
-import { useContext } from "react";
+
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../../providers/AuthProvider";
+import useAuth from "../../../Hooks/useAuth";
 
 const NavBar = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut } = useAuth();
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -44,6 +44,9 @@ const NavBar = () => {
               <li>
                 <Link to='/classes'>Classes</Link>
               </li>
+              <li>
+                <Link to='/dashboard'>DashBoard</Link>
+              </li>
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
@@ -59,6 +62,9 @@ const NavBar = () => {
             </li>
             <li>
                 <Link to='/classes'>Classes</Link>
+              </li>
+            <li>
+                <Link to='/dashboard'>DashBoard</Link>
               </li>
           </ul>
         </div>
