@@ -11,6 +11,8 @@ import AddClass from "../components/AddClass/AddClass";
 import InstructorRoute from "./InstructorRoute";
 import AdminHome from "../components/AdminHome/AdminHome";
 import InstructorHome from "../components/InstructorHome/InstructorHome";
+import PrivateRoute from "./PrivateRoute"
+import UserHome from "../components/UserHome/UserHome";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +39,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <DashBoard></DashBoard>,
+    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
     children: [
       {
         path: "adminhome",
@@ -56,6 +58,10 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "allUsers",
+        element: <AllUsers></AllUsers>
+      },
+      {
         path: "instructorhome",
         element: (
           <InstructorRoute>
@@ -71,6 +77,10 @@ const router = createBrowserRouter([
           </InstructorRoute>
         ),
       },
+      {
+        path: "userhome",
+        element: <UserHome></UserHome>
+      }
     ],
   },
 ]);

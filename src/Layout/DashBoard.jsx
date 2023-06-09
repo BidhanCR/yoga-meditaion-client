@@ -1,9 +1,11 @@
 import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
 import useInstructor from '../Hooks/useInstructor';
+import useAuth from '../Hooks/useAuth';
 
 const DashBoard = () => {
-  const [isAdmin] = useAdmin();
+  const {user} = useAuth();
+    const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
 
   return (
@@ -18,7 +20,7 @@ const DashBoard = () => {
                 <Link to="/dashboard/adminhome">Admin Home</Link>
               </li>
               <li className="px-6 py-2 hover:bg-gray-300">
-                <Link to="">All Users</Link>
+                <Link to="/dashboard/allUsers">All Users</Link>
               </li>
               <li className="px-6 py-2 hover:bg-gray-300">Manage User</li>
             </>
@@ -33,6 +35,17 @@ const DashBoard = () => {
             </li>
             </>
           )}
+          {user && (
+            <>
+            <li className="px-6 py-2 hover:bg-gray-300">
+              <Link to="/dashboard/userhome">Instructor Home</Link>
+            </li>
+            <li className="px-6 py-2 hover:bg-gray-300">
+              <Link to="/dashboard/addClass">Add Class</Link>
+            </li>
+            </>
+          )}
+
           <li className="px-6 py-2 hover:bg-gray-300">
             <Link to="/">Home</Link>
           </li>

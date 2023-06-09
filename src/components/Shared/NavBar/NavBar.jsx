@@ -47,16 +47,20 @@ const NavBar = () => {
               <li>
                 <Link to="/classes">Classes</Link>
               </li>
-              {isAdmin ? (
+              {user && (
                 <li>
-                  <Link to="/dashboard/adminhome">Dashboard</Link>
-                </li>
-              ) : (
-                <li>
-                  {isInstructor ? (
-                    <Link to="/dashboard/instructorhome">Dashboard</Link>
+                  {isAdmin ? (
+                    <Link to="/dashboard/adminhome">Dashboard</Link>
                   ) : (
-                    <Link to="/dashboard/userhome">Dashboard</Link>
+                    <Link
+                      to={
+                        isInstructor
+                          ? "/dashboard/instructorhome"
+                          : "/dashboard/userhome"
+                      }
+                    >
+                      Dashboard
+                    </Link>
                   )}
                 </li>
               )}
@@ -76,16 +80,20 @@ const NavBar = () => {
             <li>
               <Link to="/classes">Classes</Link>
             </li>
-            {isAdmin ? (
+            {user && (
               <li>
-                <Link to="/dashboard/adminhome">Dashboard</Link>
-              </li>
-            ) : (
-              <li>
-                {isInstructor ? (
-                  <Link to="/dashboard/instructorhome">Dashboard</Link>
+                {isAdmin ? (
+                  <Link to="/dashboard/adminhome">Dashboard</Link>
                 ) : (
-                  <Link to="/dashboard/userhome">Dashboard</Link>
+                  <Link
+                    to={
+                      isInstructor
+                        ? "/dashboard/instructorhome"
+                        : "/dashboard/userhome"
+                    }
+                  >
+                    Dashboard
+                  </Link>
                 )}
               </li>
             )}
