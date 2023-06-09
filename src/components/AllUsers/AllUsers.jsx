@@ -61,17 +61,19 @@ const AllUsers = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.role}</td>
-                <td className="flex flex-col md:w-1/3  space-y-2 ">
+                <td className="flex flex-col md:w-1/2  space-y-2 ">
                   <button
                     onClick={() => handleMakeAdmin(user)}
                     className="btn btn-primary btn-sm"
-                    disabled={user.role === "Admin"}
+                    disabled={user.role === "admin"}
                   >
                     Make Admin
                   </button>
-                  <button className="btn btn-secondary btn-sm" disabled={user.role === "Instructor"}>
+                  <button
+                    className="btn btn-secondary btn-sm"
+                    disabled={user.role === "instructor"}
+                  >
                     Make Instructor
-          
                   </button>
                 </td>
               </tr>
@@ -84,4 +86,4 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
-``
+
