@@ -56,7 +56,7 @@ const NavBar = () => {
                       to={
                         isInstructor
                           ? "/dashboard/instructorhome"
-                          : "/dashboard/userhome"
+                          : "/dashboard/studentHome"
                       }
                     >
                       Dashboard
@@ -89,7 +89,7 @@ const NavBar = () => {
                     to={
                       isInstructor
                         ? "/dashboard/instructorhome"
-                        : "/dashboard/userhome"
+                        : "/dashboard/studentHome"
                     }
                   >
                     Dashboard

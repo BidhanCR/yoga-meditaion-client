@@ -12,7 +12,9 @@ import InstructorRoute from "./InstructorRoute";
 import AdminHome from "../components/AdminHome/AdminHome";
 import InstructorHome from "../components/InstructorHome/InstructorHome";
 import PrivateRoute from "./PrivateRoute"
-import UserHome from "../components/UserHome/UserHome";
+
+import StudentHome from "../components/StudentHome/StudentHome";
+import ManageClass from "../components/ManageClass/ManageClass";
 
 const router = createBrowserRouter([
   {
@@ -50,16 +52,12 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "addUsers",
-        element: (
-          <AdminRoute>
-            <AllUsers></AllUsers>
-          </AdminRoute>
-        ),
+        path: "allUsers",
+        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
       },
       {
-        path: "allUsers",
-        element: <AllUsers></AllUsers>
+        path: 'manageClass',
+        element: <AdminRoute><ManageClass></ManageClass></AdminRoute>
       },
       {
         path: "instructorhome",
@@ -78,8 +76,14 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "userhome",
-        element: <UserHome></UserHome>
+        path: "addUsers",
+        element: (
+          <InstructorRoute><AllUsers></AllUsers></InstructorRoute>
+        ),
+      },
+      {
+        path: "studentHome",
+        element: <StudentHome></StudentHome>
       }
     ],
   },

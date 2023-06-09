@@ -88,7 +88,7 @@ const AllUsers = () => {
                 <th>{index + 1}</th>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td>{user.role}</td>
+                <td className="uppercase">{user.role}</td>
                 <td className="flex flex-col md:w-1/2  space-y-2 ">
                   <button
                     onClick={() => handleMakeAdmin(user)}

@@ -18,13 +18,13 @@ const Classes = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {classes.map((c) => (
           <div
-            key={c.id}
+            key={c._id}
             className={`card card-compact w-96 bg-base-100 shadow-xl ${
               c.availableSeats === 0 ? "bg-red-200" : ""
             }`}
           >
             <figure>
-              <img src={c.image} alt={c.name} />
+              <img className="h-[300px] w-full object-cover" src={c.image} alt={c.name} />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{c.name}</h2>

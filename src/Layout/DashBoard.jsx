@@ -4,8 +4,8 @@ import useInstructor from '../Hooks/useInstructor';
 import useAuth from '../Hooks/useAuth';
 
 const DashBoard = () => {
-  const {user} = useAuth();
-    const [isAdmin] = useAdmin();
+  const { user } = useAuth();
+  const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
 
   return (
@@ -20,29 +20,29 @@ const DashBoard = () => {
                 <Link to="/dashboard/adminhome">Admin Home</Link>
               </li>
               <li className="px-6 py-2 hover:bg-gray-300">
-                <Link to="/dashboard/allUsers">All Users</Link>
+                <Link to="/dashboard/allUsers">Manage Users</Link>
               </li>
-              <li className="px-6 py-2 hover:bg-gray-300">Manage User</li>
+              <li className="px-6 py-2 hover:bg-gray-300"><Link to='/dashboard/manageClass'>Manage Class</Link></li>
             </>
           )}
           {isInstructor && (
             <>
-            <li className="px-6 py-2 hover:bg-gray-300">
-              <Link to="/dashboard/instructorhome">Instructor Home</Link>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-300">
-              <Link to="/dashboard/addClass">Add Class</Link>
-            </li>
-            </>
-          )}
-          {user && (
-            <>
-            <li className="px-6 py-2 hover:bg-gray-300">
-              <Link to="/dashboard/userhome">Instructor Home</Link>
-            </li>
-            <li className="px-6 py-2 hover:bg-gray-300">
-              <Link to="/dashboard/addClass">Add Class</Link>
-            </li>
+              <li className="px-6 py-2 hover:bg-gray-300">
+                <Link to="/dashboard/instructorhome">Instructor Home</Link>
+              </li>
+              <li className="px-6 py-2 hover:bg-gray-300">
+                <Link to="/dashboard/addClass">Add Class</Link>
+              </li>
+              {user && !isAdmin && !isInstructor && (
+                <>
+                  <li className="px-6 py-2 hover:bg-gray-300">
+                    <Link to="/dashboard/studentHome">Student Home</Link>
+                  </li>
+                  <li className="px-6 py-2 hover:bg-gray-300">
+                    <Link to="">Enrolled Class</Link>
+                  </li>
+                </>
+              )}
             </>
           )}
 
@@ -65,6 +65,7 @@ const DashBoard = () => {
 };
 
 export default DashBoard;
+
 
 
 
