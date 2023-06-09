@@ -11,10 +11,11 @@ import AddClass from "../components/AddClass/AddClass";
 import InstructorRoute from "./InstructorRoute";
 import AdminHome from "../components/AdminHome/AdminHome";
 import InstructorHome from "../components/InstructorHome/InstructorHome";
-import PrivateRoute from "./PrivateRoute"
+import PrivateRoute from "./PrivateRoute";
 
 import StudentHome from "../components/StudentHome/StudentHome";
 import ManageClass from "../components/ManageClass/ManageClass";
+import MyClass from "../components/MyClass/MyClass";
 
 const router = createBrowserRouter([
   {
@@ -41,7 +42,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <DashBoard></DashBoard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "adminhome",
@@ -53,11 +58,19 @@ const router = createBrowserRouter([
       },
       {
         path: "allUsers",
-        element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
       },
       {
-        path: 'manageClass',
-        element: <AdminRoute><ManageClass></ManageClass></AdminRoute>
+        path: "manageClass",
+        element: (
+          <AdminRoute>
+            <ManageClass></ManageClass>
+          </AdminRoute>
+        ),
       },
       {
         path: "instructorhome",
@@ -76,15 +89,25 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "myClass",
+        element: (
+          <InstructorRoute>
+            <MyClass></MyClass>
+          </InstructorRoute>
+        ),
+      },
+      {
         path: "addUsers",
         element: (
-          <InstructorRoute><AllUsers></AllUsers></InstructorRoute>
+          <InstructorRoute>
+            <AllUsers></AllUsers>
+          </InstructorRoute>
         ),
       },
       {
         path: "studentHome",
-        element: <StudentHome></StudentHome>
-      }
+        element: <StudentHome></StudentHome>,
+      },
     ],
   },
 ]);

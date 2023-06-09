@@ -33,6 +33,9 @@ const DashBoard = () => {
               <li className="px-6 py-2 hover:bg-gray-300">
                 <Link to="/dashboard/addClass">Add Class</Link>
               </li>
+              <li className="px-6 py-2 hover:bg-gray-300">
+                <Link to="/dashboard/myClass">My Class</Link>
+              </li>
               {user && !isAdmin && !isInstructor && (
                 <>
                   <li className="px-6 py-2 hover:bg-gray-300">
