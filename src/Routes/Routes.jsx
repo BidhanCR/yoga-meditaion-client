@@ -8,6 +8,7 @@ import DashBoard from "../Layout/DashBoard";
 import AllUsers from "../components/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddClass from "../components/AddClass/AddClass";
+import InstructorRoute from "./InstructorRoute";
 
 
 
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/addClass",
-        element: <AddClass></AddClass>
+        element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
       }
     ],
   },
