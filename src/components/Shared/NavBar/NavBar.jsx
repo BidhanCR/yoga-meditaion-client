@@ -1,9 +1,12 @@
-
 import { Link } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
+import useAdmin from "../../../Hooks/useAdmin";
+import useInstructor from "../../../Hooks/useInstructor";
 
 const NavBar = () => {
   const { user, logOut } = useAuth();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
   const handleLogOut = () => {
     logOut()
       .then(() => {})
@@ -42,11 +45,21 @@ const NavBar = () => {
                 <Link>about</Link>
               </li>
               <li>
-                <Link to='/classes'>Classes</Link>
+                <Link to="/classes">Classes</Link>
               </li>
-              <li>
-                <Link to='/dashboard'>DashBoard</Link>
-              </li>
+              {isAdmin ? (
+                <li>
+                  <Link to="/dashboard/adminhome">Dashboard</Link>
+                </li>
+              ) : (
+                <li>
+                  {isInstructor ? (
+                    <Link to="/dashboard/instructorhome">Dashboard</Link>
+                  ) : (
+                    <Link to="/dashboard/userhome">Dashboard</Link>
+                  )}
+                </li>
+              )}
             </ul>
           </div>
           <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
@@ -61,11 +74,21 @@ const NavBar = () => {
               <Link>about</Link>
             </li>
             <li>
-                <Link to='/classes'>Classes</Link>
+              <Link to="/classes">Classes</Link>
+            </li>
+            {isAdmin ? (
+              <li>
+                <Link to="/dashboard/adminhome">Dashboard</Link>
               </li>
-            <li>
-                <Link to='/dashboard'>DashBoard</Link>
+            ) : (
+              <li>
+                {isInstructor ? (
+                  <Link to="/dashboard/instructorhome">Dashboard</Link>
+                ) : (
+                  <Link to="/dashboard/userhome">Dashboard</Link>
+                )}
               </li>
+            )}
           </ul>
         </div>
         <div className="flex-none">

@@ -9,9 +9,8 @@ import AllUsers from "../components/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
 import AddClass from "../components/AddClass/AddClass";
 import InstructorRoute from "./InstructorRoute";
-
-
-
+import AdminHome from "../components/AdminHome/AdminHome";
+import InstructorHome from "../components/InstructorHome/InstructorHome";
 
 const router = createBrowserRouter([
   {
@@ -34,19 +33,43 @@ const router = createBrowserRouter([
         path: "/classes",
         element: <Classes></Classes>,
       },
-      {
-        path: "/addClass",
-        element: <InstructorRoute><AddClass></AddClass></InstructorRoute>
-      }
     ],
   },
   {
     path: "dashboard",
-    element: <AdminRoute><DashBoard></DashBoard></AdminRoute>,
+    element: <DashBoard></DashBoard>,
     children: [
       {
-        path: "",
-        element: <AllUsers />,
+        path: "adminhome",
+        element: (
+          <AdminRoute>
+            <AdminHome></AdminHome>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "addUsers",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "instructorhome",
+        element: (
+          <InstructorRoute>
+            <InstructorHome></InstructorHome>
+          </InstructorRoute>
+        ),
+      },
+      {
+        path: "addClass",
+        element: (
+          <InstructorRoute>
+            <AddClass></AddClass>
+          </InstructorRoute>
+        ),
       },
     ],
   },
