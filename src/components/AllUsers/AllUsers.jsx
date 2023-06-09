@@ -38,6 +38,34 @@ const AllUsers = () => {
         });
       });
   };
+  const hanldeMaeInstructor = (user) => {
+    axios
+      .patch(`http://localhost:5000/users/instructor/${user._id}`)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user.name} is an Instructor Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "An error occurred",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
 
   return (
     <div>
@@ -70,6 +98,7 @@ const AllUsers = () => {
                     Make Admin
                   </button>
                   <button
+                    onClick={()=> hanldeMaeInstructor(user)}
                     className="btn btn-secondary btn-sm"
                     disabled={user.role === "instructor"}
                   >

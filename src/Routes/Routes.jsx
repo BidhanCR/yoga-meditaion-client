@@ -7,6 +7,7 @@ import Classes from "../Pages/Classes/Classes";
 import DashBoard from "../Layout/DashBoard";
 import AllUsers from "../components/AllUsers/AllUsers";
 import AdminRoute from "./AdminRoute";
+import AddClass from "../components/AddClass/AddClass";
 
 
 
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         path: "/classes",
         element: <Classes></Classes>,
       },
+      {
+        path: "/addClass",
+        element: <AddClass></AddClass>
+      }
     ],
   },
   {
