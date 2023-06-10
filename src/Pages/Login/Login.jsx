@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import SocialLogIn from "../../components/SocialLogIn/SocialLogIn";
+import { toast } from "react-hot-toast";
 
 const Login = () => {
   const {signIn} = useAuth();
@@ -20,6 +21,7 @@ const Login = () => {
     signIn(data.email, data.password)
     .then(result=> {
       console.log(result.user)
+      toast.success('logged in successfully')
       navigate(from, { replace: true })
     })
     .catch(error=> console.log(error))

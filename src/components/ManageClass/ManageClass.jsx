@@ -2,6 +2,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { useState } from "react";
 
 const ManageClass = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -9,6 +10,10 @@ const ManageClass = () => {
     const res = await axiosSecure.get("/manageClasses");
     return res.data;
   });
+
+  const [showModal, setShowModal] = useState(false);
+  const [feedback, setFeedback] = useState("");
+  const [selectedClass, setSelectedClass] = useState(null);
   const handleApprove = (c) => {
     axios
       .patch(`http://localhost:5000/classes/approved/${c._id}`)
@@ -48,7 +53,51 @@ const ManageClass = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: `${c.name} class is denied!`,
+            title: `${c.name} class is denied Now!`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "An error occurred",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  };
+  const handleSendFeedback = () => {
+    if (feedback.trim() === "") {
+      Swal.fire({
+        position: "top-end",
+        icon: "warning",
+        title: "Please enter your feedback",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      return;
+    }
+
+    axios
+      .patch(`http://localhost:5000/classes/feedback/${selectedClass._id}`, {
+        feedback,
+      })
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        if (data.modifiedCount) {
+          refetch();
+          setFeedback("");
+          setSelectedClass(null);
+          setShowModal(false);
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${selectedClass.name} class feedback sent successfully!`,
             showConfirmButton: false,
             timer: 1500,
           });
@@ -113,8 +162,8 @@ const ManageClass = () => {
                 <button
                   className="btn-sm btn"
                   onClick={() => {
-                    // const feedback = prompt("Enter your feedback");
-                    // handleSendFeedback(c.id, feedback);
+                    setSelectedClass(c);
+                    setShowModal(true);
                   }}
                 >
                   Send Feedback
@@ -124,6 +173,40 @@ const ManageClass = () => {
           </div>
         ))}
       </div>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className="absolute inset-0 bg-black opacity-30"></div>
+          <div className="relative bg-white rounded-lg p-8 max-w-xl w-full">
+            <h2 className="text-xl font-semibold mb-4">Send Feedback</h2>
+            <textarea
+              className="w-full h-32 p-2 border border-gray-300 rounded mb-4"
+              placeholder="Enter your feedback..."
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+            ></textarea>
+
+            <div className="flex justify-end">
+              <button
+                className="btn-sm btn mr-2"
+                onClick={() => {
+                  setFeedback("");
+                  setSelectedClass(null);
+                  setShowModal(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                className="btn-sm btn-primary"
+                onClick={handleSendFeedback}
+              >
+                Send
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      
     </div>
   );
 };

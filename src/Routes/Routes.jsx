@@ -16,6 +16,8 @@ import PrivateRoute from "./PrivateRoute";
 import StudentHome from "../components/StudentHome/StudentHome";
 import ManageClass from "../components/ManageClass/ManageClass";
 import MyClass from "../components/MyClass/MyClass";
+import MySelectedClass from "../components/MySelectedClass/MySelectedClass";
+
 
 const router = createBrowserRouter([
   {
@@ -108,6 +110,10 @@ const router = createBrowserRouter([
         path: "studentHome",
         element: <StudentHome></StudentHome>,
       },
+      {
+        path: "mySelectedClass",
+        element: <MySelectedClass></MySelectedClass>
+      }
     ],
   },
 ]);
