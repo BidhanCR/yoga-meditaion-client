@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = ({ classData }) => {
   const { user } = useAuth();
@@ -12,6 +13,7 @@ const CheckOutForm = ({ classData }) => {
   const elements = useElements();
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (classData?.class?.price) {
@@ -74,6 +76,7 @@ const CheckOutForm = ({ classData }) => {
         };
         const updatedData = {
           selected_status: "Enrolled",
+          date: new Date()
         };
 
         axiosSecure.post("/payment", paymentInfo).then((res) => {
@@ -84,6 +87,7 @@ const CheckOutForm = ({ classData }) => {
               .then((res) => {
                 console.log(res.data);
                 toast.success("Payment and data restoration successful");
+                navigate("/dashboard/myEnrolledClass")
               });
           }
         });

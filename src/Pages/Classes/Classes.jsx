@@ -15,7 +15,7 @@ const Classes = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(`http://localhost:5000/selectedClasses?email=${user.email}`)
+      fetch(`http://localhost:5000/selectedEnrolledClasses?email=${user.email}`)
         .then((res) => res.json())
         .then((data) => {
           setSelectedClasses(data);

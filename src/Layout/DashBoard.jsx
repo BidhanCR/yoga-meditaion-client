@@ -46,6 +46,9 @@ const DashBoard = () => {
               <li className="px-6 py-2 hover:bg-gray-300">
                 <Link to="/dashboard/mySelectedClass">My Selected Class</Link>
               </li>
+              <li className="px-6 py-2 hover:bg-gray-300">
+                <Link to="/dashboard/myEnrolledClass">My Enrolled Class</Link>
+              </li>
             </>
           )}
 

@@ -18,6 +18,7 @@ import ManageClass from "../components/ManageClass/ManageClass";
 import MyClass from "../components/MyClass/MyClass";
 import MySelectedClass from "../components/MySelectedClass/MySelectedClass";
 import Payment from "../components/Payment/Payment";
+import MyEnrolledClass from "../components/MyEnrolledClass/MyEnrolledClass";
 
 
 const router = createBrowserRouter([
@@ -114,6 +115,10 @@ const router = createBrowserRouter([
       {
         path: "mySelectedClass",
         element: <MySelectedClass></MySelectedClass>
+      },
+      {
+        path: "myEnrolledClass",
+        element: <MyEnrolledClass></MyEnrolledClass>
       },
       {
         path: "payment",
