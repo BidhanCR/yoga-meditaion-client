@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import useAuth from '../../Hooks/useAuth';
 import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 const MySelectedClass = () => {
   const { user } = useAuth();
@@ -19,17 +20,16 @@ const MySelectedClass = () => {
       .then((res) => res.json())
       .then((data) => {
         setSelectedClasses(selectedClasses.filter((c) => c._id !== selectedClass._id));
-        toast.success('Selected class deleted successfully');
+        if(data.deletedCount>0){
+            toast.success('Selected class deleted successfully');
+        }
       })
       .catch((error) => {
         console.error('Failed to delete selected class:', error);
       });
   };
 
-  const handlePayClass = (selectedClass) => {
-    // Implement your payment logic here
-    toast.success(`Payment for ${selectedClass.class.name} processed successfully`);
-  };
+  
 
   return (
     <div>
@@ -43,9 +43,8 @@ const MySelectedClass = () => {
             <div className="flex justify-end mt-4">
               <button
                 className="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2 mr-2"
-                onClick={() => handlePayClass(selectedClass)}
               >
-                Pay
+                <Link to="/dashboard/payment" state={{classData: selectedClass}}>Pay</Link>
               </button>
               <button
                 className="bg-red-500 hover:bg-red-600 text-white rounded px-4 py-2"

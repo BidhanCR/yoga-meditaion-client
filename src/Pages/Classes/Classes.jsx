@@ -34,6 +34,7 @@ const Classes = () => {
           student_email: user.email,
         },
         class: c,
+        selected_status: "Selected"
       };
 
       fetch("http://localhost:5000/selectedClasses", {
