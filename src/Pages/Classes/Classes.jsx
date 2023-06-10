@@ -1,16 +1,63 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../providers/AuthProvider";
+import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import { toast } from "react-hot-toast";
 
 const Classes = () => {
+  const { user } = useAuth();
   const [classes, setClasses] = useState([]);
-  const { user } = useContext(AuthContext);
+  const [selectedClasses, setSelectedClasses] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/classes")
       .then((res) => res.json())
       .then((data) => setClasses(data));
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      fetch(`http://localhost:5000/selectedClasses?email=${user.email}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setSelectedClasses(data);
+        })
+        .catch((error) => {
+          console.error("Failed to fetch selected classes:", error);
+        });
+    }
+  }, [user]);
+
+  const handleSelectedClass = (c) => {
+    if (user) {
+      const selectedClass = {
+        user: {
+          student_name: user.displayName,
+          student_email: user.email,
+        },
+        class: c,
+      };
+
+      fetch("http://localhost:5000/selectedClasses", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(selectedClass),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          toast.success("Class is selected successfully");
+          setSelectedClasses([...selectedClasses, selectedClass]);
+        })
+        .catch((error) => {
+          console.error("Failed to save selected class:", error);
+        });
+    }
+  };
+
+  const isClassSelected = (c) => {
+    return selectedClasses.some((sc) => sc.class._id === c._id);
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -24,7 +71,11 @@ const Classes = () => {
             }`}
           >
             <figure>
-              <img className="h-[300px] w-full object-cover" src={c.image} alt={c.name} />
+              <img
+                className="h-[300px] w-full object-cover"
+                src={c.image}
+                alt={c.name}
+              />
             </figure>
             <div className="card-body">
               <h2 className="card-title">{c.name}</h2>
@@ -35,10 +86,17 @@ const Classes = () => {
               <p className="text-gray-500">Price: ${c.price}</p>
               <div className="card-actions justify-end">
                 {user ? (
-                  c.availableSeats > 0 ? (
-                    <Link to={`/select-class/${c.id}`}>
-                      <button className="btn btn-primary">Select</button>
-                    </Link>
+                  isClassSelected(c) ? (
+                    <button className="btn btn-disabled" disabled>
+                      Selected
+                    </button>
+                  ) : c.availableSeats > 0 ? (
+                    <button
+                      onClick={() => handleSelectedClass(c)}
+                      className="btn btn-primary"
+                    >
+                      Select
+                    </button>
                   ) : (
                     <button className="btn btn-disabled" disabled>
                       Sold Out
@@ -57,7 +115,5 @@ const Classes = () => {
 };
 
 export default Classes;
-
-
 
 
