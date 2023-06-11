@@ -7,9 +7,10 @@ import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import SocialLogIn from "../../components/SocialLogIn/SocialLogIn";
 import { toast } from "react-hot-toast";
+import { Circles } from "react-loader-spinner";
 
 const Login = () => {
-  const {signIn} = useAuth();
+  const {signIn, loading} = useAuth();
   const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate()
   const location = useLocation()
@@ -77,7 +78,19 @@ const Login = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Login
+            {!loading ? (
+                <Circles
+                height="30"
+                width="30"
+                color="#4fa94d"
+                ariaLabel="circles-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+              ) : (
+                'Login'
+              )}
           </button>
           <Link to="/register" className="text-blue-500 hover:text-blue-700 text-sm">
             Register

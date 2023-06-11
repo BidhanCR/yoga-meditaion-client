@@ -40,13 +40,14 @@ const NavBar = () => {
               <li>
                 <Link to="/">Home</Link>
               </li>
-
               <li>
-                <Link>about</Link>
+                <Link to="">About</Link>
               </li>
+
               <li>
                 <Link to="/classes">Classes</Link>
               </li>
+
               {user && (
                 <li>
                   {isAdmin ? (
@@ -77,9 +78,11 @@ const NavBar = () => {
             <li>
               <Link>about</Link>
             </li>
+
             <li>
               <Link to="/classes">Classes</Link>
             </li>
+
             {user && (
               <li>
                 {isAdmin ? (

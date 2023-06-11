@@ -86,7 +86,18 @@ const CheckOutForm = ({ classData }) => {
               .patch(`/selectedClasses/${classData._id}`, updatedData)
               .then((res) => {
                 console.log(res.data);
+
                 toast.success("Payment and data restoration successful");
+                axiosSecure
+                  .patch(`/updateClasses/${classData.class._id}`)
+                  .then((res) => {
+                    console.log(res.data);
+                    // Handle the response as needed
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    // Handle errors
+                  }); 
                 navigate("/dashboard/myEnrolledClass")
               });
           }

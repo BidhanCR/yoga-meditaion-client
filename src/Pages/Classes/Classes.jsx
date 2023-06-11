@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-hot-toast";
+import useAdmin from "../../Hooks/useAdmin";
+import useInstructor from "../../Hooks/useInstructor";
 
 const Classes = () => {
   const { user } = useAuth();
+  const [ isAdmin ] = useAdmin();
+  const [ isInstructor ] = useInstructor();
+
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
 
@@ -34,7 +39,7 @@ const Classes = () => {
           student_email: user.email,
         },
         class: c,
-        selected_status: "Selected"
+        selected_status: "Selected",
       };
 
       fetch("http://localhost:5000/selectedClasses", {
@@ -86,26 +91,31 @@ const Classes = () => {
               </p>
               <p className="text-gray-500">Price: ${c.price}</p>
               <div className="card-actions justify-end">
-                {user ? (
-                  isClassSelected(c) ? (
-                    <button className="btn btn-disabled" disabled>
-                      Selected
-                    </button>
-                  ) : c.availableSeats > 0 ? (
-                    <button
-                      onClick={() => handleSelectedClass(c)}
-                      className="btn btn-primary"
-                    >
-                      Select
-                    </button>
-                  ) : (
-                    <button className="btn btn-disabled" disabled>
-                      Sold Out
-                    </button>
-                  )
-                ) : (
-                  <p>Please log in to select a course.</p>
-                )}
+              {user ? (
+  (isAdmin || isInstructor) ? (
+    <button className="btn btn-disabled" disabled>
+      Select
+    </button>
+  ) : isClassSelected(c) ? (
+    <button className="btn btn-disabled" disabled>
+      Select
+    </button>
+  ) : c.availableSeats > 0 ? (
+    <button
+      onClick={() => handleSelectedClass(c)}
+      className="btn btn-primary"
+    >
+      Select
+    </button>
+  ) : (
+    <button className="btn btn-disabled" disabled>
+      Sold Out
+    </button>
+  )
+) : (
+  <p>Please log in to select a course.</p>
+)}
+
               </div>
             </div>
           </div>
@@ -116,5 +126,3 @@ const Classes = () => {
 };
 
 export default Classes;
-
-

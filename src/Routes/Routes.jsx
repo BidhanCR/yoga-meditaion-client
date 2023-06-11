@@ -19,7 +19,7 @@ import MyClass from "../components/MyClass/MyClass";
 import MySelectedClass from "../components/MySelectedClass/MySelectedClass";
 import Payment from "../components/Payment/Payment";
 import MyEnrolledClass from "../components/MyEnrolledClass/MyEnrolledClass";
-
+import UserRoute from "./UserRoute";
 
 const router = createBrowserRouter([
   {
@@ -110,20 +110,36 @@ const router = createBrowserRouter([
       },
       {
         path: "studentHome",
-        element: <StudentHome></StudentHome>,
+        element: (
+          <UserRoute>
+            <StudentHome></StudentHome>
+          </UserRoute>
+        ),
       },
       {
         path: "mySelectedClass",
-        element: <MySelectedClass></MySelectedClass>
+        element: (
+          <UserRoute>
+            <MySelectedClass></MySelectedClass>
+          </UserRoute>
+        ),
       },
       {
         path: "myEnrolledClass",
-        element: <MyEnrolledClass></MyEnrolledClass>
+        element: (
+          <UserRoute>
+            <MyEnrolledClass></MyEnrolledClass>
+          </UserRoute>
+        ),
       },
       {
         path: "payment",
-        element: <Payment></Payment>
-      }
+        element: (
+          <UserRoute>
+            <Payment></Payment>
+          </UserRoute>
+        ),
+      },
     ],
   },
 ]);
