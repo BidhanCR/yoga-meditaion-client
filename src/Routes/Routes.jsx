@@ -21,6 +21,7 @@ import Payment from "../components/Payment/Payment";
 import MyEnrolledClass from "../components/MyEnrolledClass/MyEnrolledClass";
 import UserRoute from "./UserRoute";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import Instructor from "../Pages/Instructor/Instructor";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
         path: "/classes",
         element: <Classes></Classes>,
       },
+      {
+        path: "/instructor",
+        element: <Instructor></Instructor>
+      }
     ],
   },
   {
