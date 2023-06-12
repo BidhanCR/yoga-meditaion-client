@@ -20,11 +20,13 @@ import MySelectedClass from "../components/MySelectedClass/MySelectedClass";
 import Payment from "../components/Payment/Payment";
 import MyEnrolledClass from "../components/MyEnrolledClass/MyEnrolledClass";
 import UserRoute from "./UserRoute";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",

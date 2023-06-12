@@ -11,13 +11,13 @@ const PopularInstructor = () => {
 
   return (
     <div className="bg-[#f2ecf9]">
-      <div className="container mx-auto md:p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center py-12">Popular Classes</h1>
+      <div className="container mx-auto">
+      <h1 className="text-2xl font-bold mb-4 text-center py-12">Popular Instructor</h1>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {popularInstructors.map((instructor) => (
-          <div key={instructor._id} className="card w-96 bg-base-100 shadow-xl">
+          <div key={instructor._id} className="card  bg-base-100 shadow-xl">
             <figure>
-              <img src={instructor.instructorImage} alt={instructor._id} />
+              <img className="h-[300px] w-full object-cover" src={instructor.instructorImage} alt={instructor._id} />
             </figure>
             <div className="p-4">
               <h2 className="card-title">

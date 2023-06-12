@@ -71,7 +71,7 @@ const Classes = () => {
       <div className="container mx-auto">
       <h1 className="text-2xl font-bold py-12 text-center">Approved Classes</h1>
 
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {classes.map((c) => (
           <div
             key={c._id}
@@ -92,7 +92,6 @@ const Classes = () => {
                   {c.name}
                 </Bounce>
               </h2>
-
               <p className="text-xl">Instructor: {c.instructor}</p>
               <p className="text-xl">Enrolled Students: {c.students}</p>
               <p className="text-xl">

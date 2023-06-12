@@ -11,7 +11,7 @@ const SocialLogIn = () => {
       .then((result) => {
         console.log(result.user);
         const loggedInUser = result.user;
-        // save user to db
+        // save userData to db
         const saveUser = {
           name: loggedInUser.displayName,
           email: loggedInUser.email,
@@ -25,7 +25,8 @@ const SocialLogIn = () => {
           body: JSON.stringify(saveUser),
         })
           .then((res) => res.json())
-          .then(() => {
+          .then((result) => {
+            console.log(result)
             navigate(from, { replace: true });
           });
       })
@@ -46,7 +47,7 @@ const SocialLogIn = () => {
         onClick={handleGoogleSignIn}
         className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
       >
-        <FcGoogle size={32} />
+        <FcGoogle size={28} />
 
         <p>Continue with Google</p>
       </div>

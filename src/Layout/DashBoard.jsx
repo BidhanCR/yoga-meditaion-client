@@ -9,9 +9,9 @@ const DashBoard = () => {
   const [isInstructor] = useInstructor();
 
   return (
-    <div className="flex flex-row h-screen">
+    <div className="flex flex-row bg-[#f2ecf9]">
       {/* Left side */}
-      <div className="w-1/4 bg-gray-200">
+      <div className="w-1/4 bg-gray-200 h-screen">
         {/* Link menu */}
         <ul className="py-4">
           {isAdmin && (
@@ -60,9 +60,9 @@ const DashBoard = () => {
       </div>
 
       {/* Right side */}
-      <div className="w-3/4 bg-white">
+      <div className="w-3/4">
         {/* Content */}
-        <div className="p-4">
+        <div className="p-8">
           <Outlet />
         </div>
       </div>

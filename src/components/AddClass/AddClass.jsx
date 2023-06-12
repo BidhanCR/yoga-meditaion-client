@@ -34,6 +34,7 @@ const AddClass = () => {
           students: parseFloat(0),
           price: parseFloat(data.price),
           status: "Pending",
+          date: new Date()
         };
         fetch("http://localhost:5000/classes", {
           method: "POST",

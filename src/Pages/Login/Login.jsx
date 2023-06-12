@@ -127,7 +127,7 @@ const Login = () => {
             </button>
             <p className="text-center mt-2">
               New here? Please{" "}
-              <Link to="/register" className=" btn-link">
+              <Link to="/register" state={{from}} className=" btn-link">
                 Register
               </Link>
             </p>
