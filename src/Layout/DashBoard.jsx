@@ -2,6 +2,7 @@ import { Link, Outlet } from 'react-router-dom';
 import useAdmin from '../Hooks/useAdmin';
 import useInstructor from '../Hooks/useInstructor';
 import useAuth from '../Hooks/useAuth';
+import NavBar from '../components/Shared/NavBar/NavBar';
 
 const DashBoard = () => {
   const { user } = useAuth();
@@ -9,7 +10,9 @@ const DashBoard = () => {
   const [isInstructor] = useInstructor();
 
   return (
-    <div className="flex flex-row bg-[#f2ecf9]">
+    <div>
+      <NavBar></NavBar>
+      <div className="flex flex-row bg-[#f2ecf9]">
       {/* Left side */}
       <div className="w-1/4 bg-gray-200 h-screen">
         {/* Link menu */}
@@ -51,11 +54,6 @@ const DashBoard = () => {
               </li>
             </>
           )}
-
-          <li className="px-6 py-2 hover:bg-gray-300">
-            <Link to="/">Home</Link>
-          </li>
-          {/* Add more links as needed */}
         </ul>
       </div>
 
@@ -66,6 +64,7 @@ const DashBoard = () => {
           <Outlet />
         </div>
       </div>
+    </div>
     </div>
   );
 };

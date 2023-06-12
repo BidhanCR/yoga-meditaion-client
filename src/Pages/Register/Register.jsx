@@ -303,15 +303,17 @@ const Register = () => {
               {!isRegister ? (
                 "Register"
               ) : (
-                <Circles
-                  height={30}
-                  width={30}
-                  color="#4fa94d"
-                  ariaLabel="circles-loading"
-                  wrapperStyle={{}}
-                  wrapperClass=""
-                  visible
-                />
+                <>
+                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <Circles
+                      height={30}
+                      width={30}
+                      color="#4fa94d"
+                      ariaLabel="circles-loading"
+                    />
+                  </span>
+                  <span className="invisible">Register</span>
+                </>
               )}
             </button>
             <p className="text-center mt-4">

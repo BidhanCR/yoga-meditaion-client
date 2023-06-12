@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
 import { Bounce } from "react-awesome-reveal";
+import { Link, useLocation } from "react-router-dom";
 
 const Classes = () => {
   const { user } = useAuth();
@@ -12,6 +13,8 @@ const Classes = () => {
 
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
+
+  const location = useLocation();
 
   useEffect(() => {
     fetch("http://localhost:5000/classes")
@@ -124,7 +127,7 @@ const Classes = () => {
                     </button>
                   )
                 ) : (
-                  <p>Please log in to select a course.</p>
+                  <p><Link to="/login" state={{from: location}} className="text-blue-500">Please log in to select a course.</Link></p>
                 )}
               </div>
             </div>

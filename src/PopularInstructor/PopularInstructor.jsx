@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PopularInstructor = () => {
   const [popularInstructors, setPopularInstructors] = useState([]);
@@ -36,6 +37,11 @@ const PopularInstructor = () => {
         ))}
       </div>
       </div>
+      <div className="text-center py-8">
+          <Link to="/instructor">
+            <button className="btn bg-[#7aa011] hover:bg-[#98c619] text-white">Show all our Instructors</button>
+          </Link>
+        </div>
     </div>
   );
 };

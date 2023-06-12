@@ -34,7 +34,7 @@ const PopularClass = () => {
           ))}
         </div>
         <div className="text-center py-8">
-          <Link to="classes">
+          <Link to="/classes">
             <button className="btn bg-[#7aa011] hover:bg-[#98c619] text-white">Explore More Classes</button>
           </Link>
         </div>
