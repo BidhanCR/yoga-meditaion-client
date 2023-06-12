@@ -4,10 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const Banner = () => {
     return (
         
-            <Carousel autoPlay infiniteLoop className='text-center'>
-            <div className='h-screen'>
-                <img  src="https://i.ibb.co/p3QHm8d/beautiful-woman-cartoon-meditate-99413-84.jpg" />
-            </div>
+            <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false}>
             <div className='h-screen'>
                 <img src="https://i.ibb.co/LkBtkvw/photo-1552196527-bffef41ef674.jpg" />
             </div>

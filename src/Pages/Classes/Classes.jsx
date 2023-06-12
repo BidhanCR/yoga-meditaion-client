@@ -3,11 +3,12 @@ import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-hot-toast";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
+import { Bounce } from "react-awesome-reveal";
 
 const Classes = () => {
   const { user } = useAuth();
-  const [ isAdmin ] = useAdmin();
-  const [ isInstructor ] = useInstructor();
+  const [isAdmin] = useAdmin();
+  const [isInstructor] = useInstructor();
 
   const [classes, setClasses] = useState([]);
   const [selectedClasses, setSelectedClasses] = useState([]);
@@ -66,13 +67,15 @@ const Classes = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Approved Classes</h1>
+    <div className="bg-[#f2ecf9]">
+      <div className="container mx-auto">
+      <h1 className="text-2xl font-bold py-12 text-center">Approved Classes</h1>
+
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {classes.map((c) => (
           <div
             key={c._id}
-            className={`card card-compact w-96 bg-base-100 shadow-xl ${
+            className={`card  shadow-xl border border-green-500 ${
               c.availableSeats === 0 ? "bg-red-200" : ""
             }`}
           >
@@ -84,43 +87,52 @@ const Classes = () => {
               />
             </figure>
             <div className="card-body">
-              <h2 className="card-title">{c.name}</h2>
-              <p className="text-gray-500">{c.instructor}</p>
-              <p className="text-gray-500">
-                Available Seats: {c.availableSeats}
-              </p>
-              <p className="text-gray-500">Price: ${c.price}</p>
-              <div className="card-actions justify-end">
-              {user ? (
-  (isAdmin || isInstructor) ? (
-    <button className="btn btn-disabled" disabled>
-      Select
-    </button>
-  ) : isClassSelected(c) ? (
-    <button className="btn btn-disabled" disabled>
-      Select
-    </button>
-  ) : c.availableSeats > 0 ? (
-    <button
-      onClick={() => handleSelectedClass(c)}
-      className="btn btn-primary"
-    >
-      Select
-    </button>
-  ) : (
-    <button className="btn btn-disabled" disabled>
-      Sold Out
-    </button>
-  )
-) : (
-  <p>Please log in to select a course.</p>
-)}
+              <h2 className="card-title">
+                <Bounce delay={1e3} cascade damping={1e-1}>
+                  {c.name}
+                </Bounce>
+              </h2>
 
+              <p className="text-xl">Instructor: {c.instructor}</p>
+              <p className="text-xl">Enrolled Students: {c.students}</p>
+              <p className="text-xl">
+                Available Seats:{" "}
+                <span className="text-green-500">{c.availableSeats}</span>
+              </p>
+              <p className="text-xl">
+                Price: <span className="text-green-500">${c.price}</span>
+              </p>
+              <div className="card-actions justify-end">
+                {user ? (
+                  isAdmin || isInstructor ? (
+                    <button className="btn btn-disabled" disabled>
+                      Select
+                    </button>
+                  ) : isClassSelected(c) ? (
+                    <button className="btn btn-disabled" disabled>
+                      Select
+                    </button>
+                  ) : c.availableSeats > 0 ? (
+                    <button
+                      onClick={() => handleSelectedClass(c)}
+                      className="btn bg-[#7aa011] hover:bg-[#98c619] text-white"
+                    >
+                      Select
+                    </button>
+                  ) : (
+                    <button className="btn btn-disabled" disabled>
+                      Sold Out
+                    </button>
+                  )
+                ) : (
+                  <p>Please log in to select a course.</p>
+                )}
               </div>
             </div>
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

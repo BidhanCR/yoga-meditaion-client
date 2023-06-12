@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 
 const MyEnrolledClass = () => {
@@ -25,9 +25,9 @@ const MyEnrolledClass = () => {
             </tr>
           </thead>
           <tbody>
-            {enrolledClasses.map((c,index) => (
+            {enrolledClasses.map((c, index) => (
               <tr key={c._id}>
-                <th>{index+1}</th>
+                <th>{index + 1}</th>
                 <td>{c.class.name}</td>
                 <td>{c.class.price}</td>
                 <td className="text-green-500">{c.selected_status}</td>

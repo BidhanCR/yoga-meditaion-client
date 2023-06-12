@@ -206,7 +206,6 @@ const ManageClass = () => {
           </div>
         </div>
       )}
-      
     </div>
   );
 };

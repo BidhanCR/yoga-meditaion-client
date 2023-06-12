@@ -29,6 +29,7 @@ const AddClass = () => {
           image,
           instructor: user?.displayName,
           email: user?.email,
+          instructor_image: user?.photoURL,
           availableSeats: parseFloat(data.availableSeats),
           students: parseFloat(0),
           price: parseFloat(data.price),

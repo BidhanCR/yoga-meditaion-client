@@ -98,7 +98,7 @@ const AllUsers = () => {
                     Make Admin
                   </button>
                   <button
-                    onClick={()=> hanldeMaeInstructor(user)}
+                    onClick={() => hanldeMaeInstructor(user)}
                     className="btn btn-secondary btn-sm"
                     disabled={user.role === "instructor"}
                   >
@@ -115,4 +115,3 @@ const AllUsers = () => {
 };
 
 export default AllUsers;
-

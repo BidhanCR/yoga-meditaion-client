@@ -111,33 +111,25 @@ const router = createBrowserRouter([
       {
         path: "studentHome",
         element: (
-          <UserRoute>
-            <StudentHome></StudentHome>
-          </UserRoute>
+          <UserRoute><StudentHome></StudentHome></UserRoute>
         ),
       },
       {
         path: "mySelectedClass",
         element: (
-          <UserRoute>
-            <MySelectedClass></MySelectedClass>
-          </UserRoute>
+          <UserRoute><MySelectedClass></MySelectedClass></UserRoute>
         ),
       },
       {
         path: "myEnrolledClass",
         element: (
-          <UserRoute>
-            <MyEnrolledClass></MyEnrolledClass>
-          </UserRoute>
+          <UserRoute><MyEnrolledClass></MyEnrolledClass></UserRoute>
         ),
       },
       {
         path: "payment",
         element: (
-          <UserRoute>
-            <Payment></Payment>
-          </UserRoute>
+          <UserRoute><Payment></Payment></UserRoute>
         ),
       },
     ],
