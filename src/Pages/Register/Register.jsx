@@ -6,6 +6,7 @@ import useAuth from "../../Hooks/useAuth";
 import { Circles } from "react-loader-spinner";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import SocialLogIn from "../../components/SocialLogIn/SocialLogIn";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const {
@@ -111,6 +112,9 @@ const Register = () => {
 
   return (
     <div className="bg-[#f2ecf9]">
+      <Helmet>
+        <title>Inner Pease | Register</title>
+      </Helmet>
       <div className="flex justify-center items-center pt-8">
         <form
           className="w-full md:w-1/3 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -296,7 +300,7 @@ const Register = () => {
           </div>
           <div className="">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              className="btn-success hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
               type="submit"
               disabled={isRegister}
             >

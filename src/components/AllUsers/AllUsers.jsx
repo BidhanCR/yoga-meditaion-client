@@ -1,6 +1,7 @@
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
@@ -69,6 +70,9 @@ const AllUsers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Inner Pease | All Users</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}

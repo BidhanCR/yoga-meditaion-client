@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const MyClass = () => {
   const { user } = useAuth();
@@ -68,6 +69,9 @@ const MyClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Inner Pease | My Class</title>
+      </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -90,10 +94,10 @@ const MyClass = () => {
                 <td>{classItem.name}</td>
                 <td>{classItem.availableSeats}</td>
                 <td>{classItem.students}</td>
-                <td className="text-green-600">{classItem.status}</td>
+                <td className="text-green-900">{classItem.status}</td>
                 <td>
                   <button
-                    className="btn btn-sm"
+                    className="btn btn-sm btn-success hover:bg-green-500 text-white"
                     onClick={() => handleUpdateClick(classItem)}
                   >
                     Update
@@ -141,9 +145,9 @@ const MyClass = () => {
       )}
 
       {showUpdateModal && selectedClass && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
+        <div className="fixed inset-0 flex items-center justify-center z-50 ">
           <div className="absolute inset-0 bg-black opacity-30"></div>
-          <div className="relative bg-white rounded-lg p-8">
+          <div className="relative bg-white w-2/3 rounded-lg p-8">
             <h2 className="text-xl font-semibold mb-4">
               Update Class: {selectedClass.name}
             </h2>
@@ -155,6 +159,7 @@ const MyClass = () => {
                 name="name"
                 value={updatedClassData.name}
                 onChange={handleChange}
+                className="focus:outline-none border border-gray-300 px-3 py-2 rounded-md mt-2"
               />
 
               <label htmlFor="availableSeats">Available Seats:</label>
@@ -164,6 +169,7 @@ const MyClass = () => {
                 name="availableSeats"
                 value={updatedClassData.availableSeats}
                 onChange={handleChange}
+                className="focus:outline-none border border-gray-300 px-3 py-2 rounded-md mt-2"
               />
               
               <label htmlFor="price">Price:</label>
@@ -173,16 +179,15 @@ const MyClass = () => {
                 name="price"
                 value={updatedClassData.price}
                 onChange={handleChange}
+                className="focus:outline-none border border-gray-300 px-3 py-2 rounded-md mt-2"
               />
 
-              <button type="submit" className="btn btn-primary mt-4">
+              <div className="flex justify-between mt-4">
+              <button type="submit" className="btn btn-success hover:bg-green-500 text-white  w-1/3">
                 Save
               </button>
-            </form>
-
-            <div className="flex justify-end mt-2">
               <button
-                className="btn btn-sm mr-2"
+                className="btn bg-red-400 hover:bg-red-700 text-white w-1/3"
                 onClick={() => {
                   setSelectedClass(null);
                   setShowUpdateModal(false);
@@ -190,7 +195,10 @@ const MyClass = () => {
               >
                 Close
               </button>
-            </div>
+              </div>
+            </form>
+
+            
           </div>
         </div>
       )}

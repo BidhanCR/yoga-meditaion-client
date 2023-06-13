@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const PopularClass = () => {
   const [popularClasses, setPopularClasses] = useState([]);
 
@@ -9,6 +10,9 @@ const PopularClass = () => {
       .then((res) => res.json())
       .then((data) => setPopularClasses(data));
   }, []);
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
   return (
     <div className="bg-[#f2ecf9]">
@@ -16,7 +20,7 @@ const PopularClass = () => {
         <h1 className="text-2xl font-bold mb-4 text-center py-12">Popular Classes</h1>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {popularClasses.map((c) => (
-            <div key={c._id} className="card w-full bg-base-100 shadow-xl">
+            <div  data-aos="flip-up" key={c._id} className="card w-full bg-base-100 shadow-xl">
               <figure className="px-10 pt-10">
                 <img
                   src={c.image}

@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const ManageClass = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -117,6 +118,9 @@ const ManageClass = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Inner Pease | Manage Class</title>
+      </Helmet>
       <h1>Manage Classes</h1>
       <div className="grid grid-cols-1 gap-4">
         {classes.map((c) => (

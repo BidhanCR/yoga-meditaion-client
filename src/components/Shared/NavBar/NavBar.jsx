@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";
 import useInstructor from "../../../Hooks/useInstructor";
@@ -8,19 +8,30 @@ const NavBar = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isActive = (paths) => {
+    return paths.some((path) => location.pathname === path)
+      ? "text-success"
+      : "";
+  };
+
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        navigate("/")
+        navigate("/");
       })
       .catch((error) => console.log(error));
   };
+
   return (
-    <div className="sticky top-0 z-10">
+    <div className="sticky top-0 z-30">
       <div className="navbar bg-base-100 flex justify-between">
         <div className="">
+          {/* Dropdown Menu */}
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
+              {/* Dropdown icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -36,76 +47,128 @@ const NavBar = () => {
                 />
               </svg>
             </label>
+            {/* Dropdown content */}
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 border border-gray-400 rounded-box w-52"
             >
-              <li >
-                <Link to="/">Home</Link>
+              <li className={isActive(["/"])}>
+                <Link to="/" className={isActive(["/"]) ? "active-link" : ""}>
+                  Home
+                </Link>
               </li>
-              <li >
-                <Link to="/instructor">Instructors</Link>
+              <li className={isActive(["/instructor"])}>
+                <Link
+                  to="/instructor"
+                  className={isActive(["/instructor"]) ? "active-link" : ""}
+                >
+                  Instructors
+                </Link>
               </li>
-
-              <li>
-                <Link to="/classes">Classes</Link>
+              <li className={isActive(["/classes"])}>
+                <Link
+                  to="/classes"
+                  className={isActive(["/classes"]) ? "active-link" : ""}
+                >
+                  Classes
+                </Link>
               </li>
-
               {user && (
-                <li>
-                  {isAdmin ? (
-                    <Link to="/dashboard/adminhome">Dashboard</Link>
-                  ) : (
-                    <Link
-                      to={
-                        isInstructor
-                          ? "/dashboard/instructorhome"
-                          : "/dashboard/studentHome"
-                      }
-                    >
-                      Dashboard
-                    </Link>
-                  )}
-                </li>
-              )}
-            </ul>
-          </div>
-          <img className="w-24 h-24" src="https://i.ibb.co/MDbg7D8/2.jpg" alt="" />
-        </div>
-        <div className=" hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            <li className="text-xl">
-              <Link to="/">Home</Link>
-            </li>
-
-            <li className="text-xl">
-              <Link to="/instructor">Instructors</Link>
-            </li>
-
-            <li className="text-xl">
-              <Link to="/classes">Classes</Link>
-            </li>
-
-            {user && (
-              <li className="text-xl">
-                {isAdmin ? (
-                  <Link to="/dashboard/adminhome">Dashboard</Link>
-                ) : (
+                <li
+                  className={isActive([
+                    "/dashboard/adminhome",
+                    "/dashboard/instructorhome",
+                    "/dashboard/studentHome",
+                  ])}
+                >
                   <Link
                     to={
-                      isInstructor
+                      isAdmin
+                        ? "/dashboard/adminhome"
+                        : isInstructor
                         ? "/dashboard/instructorhome"
                         : "/dashboard/studentHome"
+                    }
+                    className={
+                      isActive([
+                        "/dashboard/adminhome",
+                        "/dashboard/instructorhome",
+                        "/dashboard/studentHome",
+                      ])
+                        ? "active-link"
+                        : ""
                     }
                   >
                     Dashboard
                   </Link>
-                )}
+                </li>
+              )}
+            </ul>
+          </div>
+          {/* Logo */}
+          <img
+            className="w-24 h-24"
+            src="https://i.ibb.co/MDbg7D8/2.jpg"
+            alt=""
+          />
+        </div>
+        <div className="hidden lg:flex">
+          <ul className="menu menu-horizontal px-1">
+            <li className={`text-xl ${isActive(["/"])}`}>
+              <Link to="/" className={isActive(["/"]) ? "active-link" : ""}>
+                Home
+              </Link>
+            </li>
+            <li className={`text-xl ${isActive(["/instructor"])}`}>
+              <Link
+                to="/instructor"
+                className={isActive(["/instructor"]) ? "active-link" : ""}
+              >
+                Instructors
+              </Link>
+            </li>
+            <li className={`text-xl ${isActive(["/classes"])}`}>
+              <Link
+                to="/classes"
+                className={isActive(["/classes"]) ? "active-link" : ""}
+              >
+                Classes
+              </Link>
+            </li>
+            {user && (
+              <li
+                className={`text-xl ${isActive([
+                  "/dashboard/adminhome",
+                  "/dashboard/instructorhome",
+                  "/dashboard/studentHome",
+                ])}`}
+              >
+                <Link
+                  to={
+                    isAdmin
+                      ? "/dashboard/adminhome"
+                      : isInstructor
+                      ? "/dashboard/instructorhome"
+                      : "/dashboard/studentHome"
+                  }
+                  className={
+                    isActive([
+                      "/dashboard/adminhome",
+                      "/dashboard/instructorhome",
+                      "/dashboard/studentHome",
+                    ])
+                      ? "active-link"
+                      : ""
+                  }
+                >
+                  Dashboard
+                </Link>
               </li>
             )}
           </ul>
         </div>
         <div className="flex-none">
+          {/* Dropdown Menu */}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-16 rounded-full">
@@ -119,11 +182,18 @@ const NavBar = () => {
                 />
               </div>
             </label>
+            {/* Dropdown content */}
             <ul
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 border border-gray-400 rounded-box w-52"
             >
-              <li>
+              <li
+                className={isActive([
+                  "/dashboard/adminhome",
+                  "/dashboard/instructorhome",
+                  "/dashboard/studenthome",
+                ])}
+              >
                 <Link
                   to={
                     isAdmin
@@ -132,11 +202,19 @@ const NavBar = () => {
                       ? "/dashboard/instructorhome"
                       : "/dashboard/studenthome"
                   }
+                  className={
+                    isActive([
+                      "/dashboard/adminhome",
+                      "/dashboard/instructorhome",
+                      "/dashboard/studenthome",
+                    ])
+                      ? "active-link"
+                      : ""
+                  }
                 >
                   Profile
                 </Link>
               </li>
-
               {user ? (
                 <li>
                   <button onClick={handleLogOut}>Log out</button>

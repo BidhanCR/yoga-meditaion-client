@@ -7,6 +7,7 @@ import { useState } from "react";
 import SocialLogIn from "../../components/SocialLogIn/SocialLogIn";
 import { toast } from "react-hot-toast";
 import { Circles } from "react-loader-spinner";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const { signIn } = useAuth();
@@ -50,6 +51,9 @@ const Login = () => {
 
   return (
     <div className="bg-[#f2ecf9]">
+      <Helmet>
+        <title>Inner Pease | Login</title>
+      </Helmet>
       <div className="flex flex-col justify-center items-center pt-8">
         <form
           className="w-96 bg-white shadow-md rounded px-8 pt-8 pb-8 mb-4"
@@ -107,7 +111,7 @@ const Login = () => {
           </div>
           <div className="mb-4">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full relative"
+              className="btn-success hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full relative"
               type="submit"
               disabled={isLoggingIn}
             >

@@ -1,6 +1,7 @@
 
 import { useEffect } from "react";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 const Instructor = () => {
   const [instructors, setInstructors] = useState([]);
@@ -11,6 +12,9 @@ const Instructor = () => {
   }, []);
   return (
     <div className="bg-[#f2ecf9]">
+      <Helmet>
+        <title>Inner Pease | Instructors</title>
+      </Helmet>
       <div className="p-8">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {instructors.map((instructor) => (

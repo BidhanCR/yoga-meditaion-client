@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const AddClass = () => {
   const { user } = useAuth();
@@ -61,6 +62,9 @@ const AddClass = () => {
 
   return (
     <div className="w-full md:w-1/2 mx-auto">
+      <Helmet>
+        <title>Inner Pease | Add Class</title>
+      </Helmet>
       <div>
         <h1 className="text-2xl font-bold mb-4 text-center">Add a Class</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -159,9 +163,9 @@ const AddClass = () => {
             />
           </div>
 
-          <div className="flex justify-end">
+          <div className="">
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="bg-success w-full hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Add

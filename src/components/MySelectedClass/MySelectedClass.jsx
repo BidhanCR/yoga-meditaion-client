@@ -1,38 +1,40 @@
-import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
 const MySelectedClass = () => {
   const { user } = useAuth();
-  const [selectedClasses, setSelectedClasses] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/selectedClasses?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setSelectedClasses(data));
-  }, [user]);
+  const [axiosSecure] = useAxiosSecure();
+  const { data: selectedClasses = [], refetch } = useQuery(
+    ["selectedClasses", user?.email],
+    async () => {
+      const res = await axiosSecure.get(`/selectedClasses?email=${user.email}`);
+      return res.data;
+    }
+  );
 
   const handleDeleteClass = (selectedClass) => {
-    fetch(`http://localhost:5000/selectedClasses/${selectedClass._id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setSelectedClasses(
-          selectedClasses.filter((c) => c._id !== selectedClass._id)
-        );
+    axios
+      .delete(`http://localhost:5000/selectedClasses/${selectedClass._id}`)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        refetch();
         if (data.deletedCount > 0) {
           toast.success("Selected class deleted successfully");
         }
-      })
-      .catch((error) => {
-        console.error("Failed to delete selected class:", error);
       });
   };
 
   return (
     <div>
+      <Helmet>
+        <title>Inner Pease | My Selected Class</title>
+      </Helmet>
       <h1 className="text-2xl font-bold mb-4">My Selected Classes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {selectedClasses.map((selectedClass) => (
@@ -45,14 +47,15 @@ const MySelectedClass = () => {
             </p>
             <p className="text-gray-500">Price: ${selectedClass.class.price}</p>
             <div className="flex justify-end mt-4">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2 mr-2">
-                <Link
-                  to="/dashboard/payment"
-                  state={{ classData: selectedClass }}
-                >
+              <Link
+                to="/dashboard/payment"
+                state={{ classData: selectedClass }}
+              >
+                <button className="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2 mr-2">
                   Pay
-                </Link>
-              </button>
+                </button>
+              </Link>
+
               <button
                 className="bg-red-500 hover:bg-red-600 text-white rounded px-4 py-2"
                 onClick={() => handleDeleteClass(selectedClass)}
