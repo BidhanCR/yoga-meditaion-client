@@ -19,7 +19,9 @@ const MySelectedClass = () => {
 
   const handleDeleteClass = (selectedClass) => {
     axios
-      .delete(`http://localhost:5000/selectedClasses/${selectedClass._id}`)
+      .delete(
+        `https://yoga-mindfulness-server.vercel.app/selectedClasses/${selectedClass._id}`
+      )
       .then((res) => {
         const data = res.data;
         console.log(data);
@@ -38,7 +40,10 @@ const MySelectedClass = () => {
       <h1 className="text-2xl font-bold mb-4">My Selected Classes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {selectedClasses.map((selectedClass) => (
-          <div key={selectedClass._id} className="bg-white rounded shadow p-4">
+          <div
+            key={selectedClass._id}
+            className="bg-white rounded shadow p-4 card flex flex-col"
+          >
             <h2 className="text-lg font-bold mb-2">
               {selectedClass.class.name}
             </h2>
@@ -46,18 +51,19 @@ const MySelectedClass = () => {
               Instructor: {selectedClass.class.instructor}
             </p>
             <p className="text-gray-500">Price: ${selectedClass.class.price}</p>
-            <div className="flex justify-end mt-4">
+            <div className="flex-grow"></div>
+            <div className="flex justify-end items-end">
               <Link
                 to="/dashboard/payment"
                 state={{ classData: selectedClass }}
               >
-                <button className="bg-blue-500 hover:bg-blue-600 text-white rounded px-4 py-2 mr-2">
+                <button className="btn btn-success hover:bg-green-500 text-white rounded px-4 py-2 mr-2">
                   Pay
                 </button>
               </Link>
 
               <button
-                className="bg-red-500 hover:bg-red-600 text-white rounded px-4 py-2"
+                className="btn bg-red-500 hover:bg-red-600 text-white rounded px-4 py-2"
                 onClick={() => handleDeleteClass(selectedClass)}
               >
                 Delete

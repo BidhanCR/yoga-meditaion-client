@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 import useAdmin from "../../Hooks/useAdmin";
 import useInstructor from "../../Hooks/useInstructor";
 import { Bounce } from "react-awesome-reveal";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -14,8 +14,6 @@ const Classes = () => {
   const [isAdmin] = useAdmin();
   const [isInstructor] = useInstructor();
   const [selectedClasses, setSelectedClasses] = useState([]);
-
-  const location = useLocation();
 
   const [axiosSecure] = useAxiosSecure();
   const { data: classes = [] } = useQuery(
@@ -45,9 +43,10 @@ const Classes = () => {
         },
         class: c,
         selected_status: "Selected",
+        selected_date: new Date(),
       };
 
-      fetch("http://localhost:5000/selectedClasses", {
+      fetch("https://yoga-mindfulness-server.vercel.app/selectedClasses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -134,11 +133,7 @@ const Classes = () => {
                     )
                   ) : (
                     <p>
-                      <Link
-                        to="/login"
-                        state={{ from: location }}
-                        className="text-blue-500"
-                      >
+                      <Link to="/login" className="text-blue-500">
                         Please log in to select a course.
                       </Link>
                     </p>

@@ -13,7 +13,9 @@ const AllUsers = () => {
 
   const handleMakeAdmin = (user) => {
     axios
-      .patch(`http://localhost:5000/users/admin/${user._id}`)
+      .patch(
+        `https://yoga-mindfulness-server.vercel.app/users/admin/${user._id}`
+      )
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -41,7 +43,9 @@ const AllUsers = () => {
   };
   const hanldeMaeInstructor = (user) => {
     axios
-      .patch(`http://localhost:5000/users/instructor/${user._id}`)
+      .patch(
+        `https://yoga-mindfulness-server.vercel.app/users/instructor/${user._id}`
+      )
       .then((response) => {
         const data = response.data;
         console.log(data);

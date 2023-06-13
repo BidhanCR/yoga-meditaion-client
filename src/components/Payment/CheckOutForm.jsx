@@ -76,7 +76,7 @@ const CheckOutForm = ({ classData }) => {
         };
         const updatedData = {
           selected_status: "Enrolled",
-          date: new Date()
+          enrolled_date: new Date()
         };
 
         axiosSecure.post("/payment", paymentInfo).then((res) => {
@@ -125,7 +125,7 @@ const CheckOutForm = ({ classData }) => {
             },
           }}
         />
-        <button className="btn btn-primary" type="submit" disabled={!stripe}>
+        <button className="btn btn-success hover:bg-green-500 text-white" type="submit" disabled={!stripe}>
           Pay
         </button>
       </form>

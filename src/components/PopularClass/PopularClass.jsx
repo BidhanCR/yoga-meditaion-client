@@ -6,10 +6,11 @@ const PopularClass = () => {
   const [popularClasses, setPopularClasses] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/popularClass")
+    fetch("https://yoga-mindfulness-server.vercel.app/popularClass")
       .then((res) => res.json())
       .then((data) => setPopularClasses(data));
   }, []);
+
   useEffect(() => {
     AOS.init();
   }, []);
@@ -17,10 +18,16 @@ const PopularClass = () => {
   return (
     <div className="bg-[#f2ecf9]">
       <div className="container mx-auto">
-        <h1 className="text-2xl font-bold mb-4 text-center py-12">Popular Classes</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center py-12">
+          Popular Classes
+        </h1>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {popularClasses.map((c) => (
-            <div  data-aos="flip-up" key={c._id} className="card w-full bg-base-100 shadow-xl">
+            <div
+              data-aos="flip-up"
+              key={c._id}
+              className="card w-full bg-base-100 shadow-xl"
+            >
               <figure className="px-10 pt-10">
                 <img
                   src={c.image}
@@ -39,7 +46,9 @@ const PopularClass = () => {
         </div>
         <div className="text-center py-8">
           <Link to="/classes">
-            <button className="btn bg-[#7aa011] hover:bg-[#98c619] text-white">Explore More Classes</button>
+            <button className="btn bg-[#7aa011] hover:bg-[#98c619] text-white">
+              Explore More Classes
+            </button>
           </Link>
         </div>
       </div>

@@ -39,63 +39,65 @@ const Register = () => {
       .then((res) => res.json())
       .then((imageData) => {
         const photoUrl = imageData.data.display_url;
-        createUser(data.email, data.password).then((result) => {
-          const loggedUser = result.user;
-          console.log(loggedUser);
+        createUser(data.email, data.password)
+          .then((result) => {
+            const loggedUser = result.user;
+            console.log(loggedUser);
 
-          updateUserProfile(data.name, photoUrl)
-            .then(() => {
-              const saveUser = {
-                name: data.name,
-                email: data.email,
-                role: "student",
-                image: photoUrl,
-                gender: data.gender,
-                phoneNumber: data.phoneNumber,
-              };
-              fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                },
-                body: JSON.stringify(saveUser),
+            updateUserProfile(data.name, photoUrl)
+              .then(() => {
+                const saveUser = {
+                  name: data.name,
+                  email: data.email,
+                  role: "student",
+                  image: photoUrl,
+                  gender: data.gender,
+                  phoneNumber: data.phoneNumber,
+                  account_created_date: new Date(),
+                };
+                fetch("https://yoga-mindfulness-server.vercel.app/users", {
+                  method: "POST",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  body: JSON.stringify(saveUser),
+                })
+                  .then((res) => res.json())
+                  .then((data) => {
+                    if (data.insertedId) {
+                      reset();
+                      Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "User created successfully.",
+                        showConfirmButton: false,
+                        timer: 1500,
+                      });
+                      navigate(from, { replace: true });
+                    }
+                  });
               })
-                .then((res) => res.json())
-                .then((data) => {
-                  if (data.insertedId) {
-                    reset();
-                    Swal.fire({
-                      position: "top-end",
-                      icon: "success",
-                      title: "User created successfully.",
-                      showConfirmButton: false,
-                      timer: 1500,
-                    });
-                    navigate(from, { replace: true });
-                  }
-                });
-            })
-            .catch(error =>console.log(error))
-        })
-        .catch((error) => {
-          console.log(error);
-          setIsRegister(false);
-          let errorMessage =
-            "An error occurred during registration. Please try again later.";
-          if (error.code === "auth/email-already-in-use") {
-            errorMessage = "Email is already in use.";
-          } else if (error.code === "auth/invalid-email") {
-            errorMessage = "Invalid email.";
-          } else if (error.code === "auth/weak-password") {
-            errorMessage =
-              "Weak password. Password should be at least 6 characters long.";
-          }
-          Swal.fire({
-            icon: "error",
-            title: "Registration Failed",
-            text: errorMessage,
+              .catch((error) => console.log(error));
+          })
+          .catch((error) => {
+            console.log(error);
+            setIsRegister(false);
+            let errorMessage =
+              "An error occurred during registration. Please try again later.";
+            if (error.code === "auth/email-already-in-use") {
+              errorMessage = "Email is already in use.";
+            } else if (error.code === "auth/invalid-email") {
+              errorMessage = "Invalid email.";
+            } else if (error.code === "auth/weak-password") {
+              errorMessage =
+                "Weak password. Password should be at least 6 characters long.";
+            }
+            Swal.fire({
+              icon: "error",
+              title: "Registration Failed",
+              text: errorMessage,
+            });
           });
-        });
       });
   };
 
@@ -171,7 +173,6 @@ const Register = () => {
                 {...register("password", {
                   required: true,
                   minLength: 6,
-                  maxLength: 20,
                   pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/,
                 })}
                 placeholder="password"
@@ -193,14 +194,9 @@ const Register = () => {
                 Password must be 6 characters
               </span>
             )}
-            {errors.password?.type === "maxLength" && (
-              <span className="text-red-500">
-                Password must be less than 20 characters
-              </span>
-            )}
             {errors.password?.type === "pattern" && (
               <span className="text-red-500">
-                Password must have one Uppercase one lower case, one number and
+                Password must have one Uppercase, one lower case, one number and
                 one special character.
               </span>
             )}
@@ -300,7 +296,7 @@ const Register = () => {
           </div>
           <div className="">
             <button
-              className="btn-success hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              className="btn-success hover:bg-green-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full relative"
               type="submit"
               disabled={isRegister}
             >
@@ -308,7 +304,7 @@ const Register = () => {
                 "Register"
               ) : (
                 <>
-                  <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <span className="absolute inset-0 flex items-center justify-center">
                     <Circles
                       height={30}
                       width={30}
@@ -327,6 +323,7 @@ const Register = () => {
               </Link>
             </p>
           </div>
+
           <div className="mt-8">
             <div className="divider">OR</div>
             <SocialLogIn></SocialLogIn>

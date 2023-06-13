@@ -35,9 +35,9 @@ const AddClass = () => {
           students: parseFloat(0),
           price: parseFloat(data.price),
           status: "Pending",
-          date: new Date()
+          date: new Date(),
         };
-        fetch("http://localhost:5000/classes", {
+        fetch("https://yoga-mindfulness-server.vercel.app/classes", {
           method: "POST",
           headers: {
             "content-type": "application/json",

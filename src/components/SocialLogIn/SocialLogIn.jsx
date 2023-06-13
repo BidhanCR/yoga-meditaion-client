@@ -17,7 +17,7 @@ const SocialLogIn = () => {
           email: loggedInUser.email,
           role: "student",
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://yoga-mindfulness-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -26,7 +26,7 @@ const SocialLogIn = () => {
         })
           .then((res) => res.json())
           .then((result) => {
-            console.log(result)
+            console.log(result);
             navigate(from, { replace: true });
           });
       })

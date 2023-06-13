@@ -14,6 +14,7 @@ const Payment = () => {
       <Helmet>
         <title>Inner Pease | Payment</title>
       </Helmet>
+      <h3 className="text-3xl mb-6">Pay Here</h3>
       <CheckOutForm classData={classData} />
     </Elements>
   );

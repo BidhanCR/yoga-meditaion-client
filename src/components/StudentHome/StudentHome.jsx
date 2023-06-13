@@ -15,18 +15,18 @@ const StudentHome = () => {
     }
   );
   return (
-    <div className="w-1/2">
+    <div >
       <Helmet>
         <title>Inner Pease | Student Profile</title>
       </Helmet>
-      <h1 className="text-center text-3xl mb-16">Student Profile</h1>
+      <h1 className="text-3xl mb-16 ml-8">Student Profile</h1>
       <div>
         {userInfo.map((user) => (
           <div key={user._id} className="flex flex-col md:flex-row ml-8 gap-4">
             <div>
               <img className="w-48 h-48" src={user.image} alt="" />
             </div>
-            <div className="ml-8">
+            <div className="">
               <h2>Student Name: {user.name}</h2>
               <p>Email: {user.email}</p>
               <p>Mobile: {user.phoneNumber}</p>

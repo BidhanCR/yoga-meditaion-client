@@ -39,7 +39,7 @@ const MyEnrolledClass = () => {
               <tr key={c._id}>
                 <th>{index + 1}</th>
                 <td>{c.class.name}</td>
-                <td>{new Date(c.class.date).toLocaleDateString()}</td>
+                <td>{new Date(c.enrolled_date).toLocaleDateString()}</td>
                 <td>{c.class.price}</td>
                 <td className="text-green-500">{c.selected_status}</td>
               </tr>

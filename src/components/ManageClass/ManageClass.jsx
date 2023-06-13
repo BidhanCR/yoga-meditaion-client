@@ -17,7 +17,9 @@ const ManageClass = () => {
   const [selectedClass, setSelectedClass] = useState(null);
   const handleApprove = (c) => {
     axios
-      .patch(`http://localhost:5000/classes/approved/${c._id}`)
+      .patch(
+        `https://yoga-mindfulness-server.vercel.app/classes/approved/${c._id}`
+      )
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -45,7 +47,9 @@ const ManageClass = () => {
   };
   const handleDeny = (c) => {
     axios
-      .patch(`http://localhost:5000/classes/denied/${c._id}`)
+      .patch(
+        `https://yoga-mindfulness-server.vercel.app/classes/denied/${c._id}`
+      )
       .then((response) => {
         const data = response.data;
         console.log(data);
@@ -84,9 +88,12 @@ const ManageClass = () => {
     }
 
     axios
-      .patch(`http://localhost:5000/classes/feedback/${selectedClass._id}`, {
-        feedback,
-      })
+      .patch(
+        `https://yoga-mindfulness-server.vercel.app/classes/feedback/${selectedClass._id}`,
+        {
+          feedback,
+        }
+      )
       .then((response) => {
         const data = response.data;
         console.log(data);
